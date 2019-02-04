@@ -1,0 +1,166 @@
+tree: XhhMiniNtuple
+
+directory: output
+
+output: test.root
+
+selection: 
+    - PassTrackJetEta
+    - (num_pass_btag(asso_trkjet_MV2c20[0][0], asso_trkjet_MV2c20[0][1], asso_trkjet_MV2c20[1][0], asso_trkjet_MV2c20[1][1], -0.9291) == 4 || Pass4Btag)
+    - PassControlMass
+    
+ratio: no
+
+systematics: no # not working
+
+data: no # not working
+
+samples:
+
+    - name    : data
+      stack   : no
+      overlay : yes
+      path    : /afs/cern.ch/user/b/btong/eos/atlas/user/l/lazovich/microntup/data/data_A4-C4.root
+      label   : "Data (A4-C4)"
+      color   : ROOT.kBlack
+      is_data : yes
+      weights :
+          - "1"
+
+    - name    : qcd
+      stack   : yes
+      overlay : no
+      path    : ../post_processing/qcd/qcd_btag90wp.root
+      label   : "QCD (d-d)"
+      color   : ROOT.kRed-10
+      is_data : no
+      weights :
+          - "mu_qcd*weight_qcd"
+
+plots:
+
+    - name     : m4b
+      variable : inv_mass(calo_jet_pt[0], calo_jet_eta[0], calo_jet_phi[0], calo_jet_m[0], calo_jet_pt[1], calo_jet_eta[1], calo_jet_phi[1], calo_jet_m[1])/1000000.0
+      xtitle   : "M_{4b} [TeV]"
+      ytitle   : Number of events
+      n_bins   : 30
+      bin_low  : 0.0
+      bin_high : 3.0
+      logY     : no
+    - name     : lead_calojet_pt
+      variable : calo_jet_pt[0]/1000.0
+      xtitle   : "Lead calo. jet p_{T} [GeV]"
+      ytitle   : Number of events
+      n_bins   : 15
+      bin_low  : 300.0
+      bin_high : 900.0
+      logY     : no
+    - name     : sublead_calojet_pt
+      variable : calo_jet_pt[1]/1000.0
+      xtitle   : "Sublead calo. jet p_{T} [GeV]"
+      ytitle   : Number of events
+      n_bins   : 15
+      bin_low  : 200.0
+      bin_high : 800.0
+      logY     : no
+    - name     : lead_calojet_eta
+      variable : calo_jet_eta[0]
+      xtitle   : "Lead calo. jet #eta"
+      ytitle   : Number of events
+      n_bins   : 20
+      bin_low  : -2.3
+      bin_high : 2.3
+      logY     : no
+    - name     : sublead_calojet_eta
+      variable : calo_jet_eta[1]
+      xtitle   : "Sublead calo. jet #eta"
+      ytitle   : Number of events
+      n_bins   : 20
+      bin_low  : -2.3
+      bin_high : 2.3
+      logY     : no
+    - name     : lead_calojet_phi
+      variable : calo_jet_phi[0]
+      xtitle   : "Lead calo. jet #phi"
+      ytitle   : Number of events
+      n_bins   : 20
+      bin_low  : -3.2
+      bin_high : 3.2
+      logY     : no
+    - name     : sublead_calojet_phi
+      variable : calo_jet_phi[1]
+      xtitle   : "Sublead calo. jet #phi"
+      ytitle   : Number of events
+      n_bins   : 20
+      bin_low  : -3.2
+      bin_high : 3.2
+      logY     : no
+    - name     : lead_calojet_m
+      variable : calo_jet_m[0]/1000.0
+      xtitle   : "Lead calo. jet M"
+      ytitle   : Number of events
+      n_bins   : 10
+      bin_low  : 0.
+      bin_high : 500.
+      logY     : no
+    - name     : sublead_calojet_m
+      variable : calo_jet_m[1]/1000.0
+      xtitle   : "Sublead calo. jet M"
+      ytitle   : Number of events
+      n_bins   : 10
+      bin_low  : 0.
+      bin_high : 500.
+      logY     : no
+    - name     : calojet_dR
+      variable : dR(calo_jet_eta[0], calo_jet_phi[0], calo_jet_eta[1], calo_jet_phi[1])
+      xtitle   : "#Delta R(j_{1}^{calo}, j_{2}^{calo})"
+      ytitle   : Number of events
+      n_bins   : 30
+      bin_low  : 0
+      bin_high : 6.28
+      logY     : no
+    - name     : calojet_dphi
+      variable : dphi(calo_jet_phi[0], calo_jet_phi[1])
+      xtitle   : "#Delta #phi(j_{1}^{calo}, j_{2}^{calo})"
+      ytitle   : Number of events
+      n_bins   : 20
+      bin_low  : 0
+      bin_high : 3.3
+      logY     : no
+    - name     : leadtrkjet_leadcalojet_pt
+      variable : asso_trkjet_pt[0][0]/1000.0
+      xtitle   : "p_{T}^{j1, tj1} [GeV]"
+      ytitle   : Number of events
+      n_bins   : 10
+      bin_low  : 10
+      bin_high : 510
+      logY     : no
+    - name     : subleadtrkjet_leadcalojet_pt
+      variable : asso_trkjet_pt[0][1]/1000.0
+      xtitle   : "p_{T}^{j1, tj2} [GeV]"
+      ytitle   : Number of events
+      n_bins   : 10
+      bin_low  : 10
+      bin_high : 510
+      logY     : no
+    - name     : leadtrkjet_subleadcalojet_pt
+      variable : asso_trkjet_pt[1][0]/1000.0
+      xtitle   : "p_{T}^{j2, tj1} [GeV]"
+      ytitle   : Number of events
+      n_bins   : 10
+      bin_low  : 10
+      bin_high : 510
+      logY     : no
+    - name     : subleadtrkjet_subleadcalojet_pt
+      variable : asso_trkjet_pt[1][1]/1000.0
+      xtitle   : "p_{T}^{j2, tj2} [GeV]"
+      ytitle   : Number of events
+      n_bins   : 10
+      bin_low  : 10
+      bin_high : 510
+      logY     : no
+
+
+      
+      
+    

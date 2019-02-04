@@ -1,0 +1,12 @@
+Have now moved to git. 
+
+checkout with:
+	git clone https://github.com/UCATLAS/xAODAnaHelpers.git
+You will also need 
+
+	git clone https://github.com/UCATLAS/xAODAnaHelpers.git
+        # XhhResolved
+	# XhhBoosted
+	#./XhhCommon/checkout_extras.sh 
+	rc find_packages
+	rc compile

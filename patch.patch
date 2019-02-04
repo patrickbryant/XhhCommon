@@ -1,0 +1,265 @@
+Index: JetUncertainties/CombinedMassUncertaintyComponent.h
+===================================================================
+--- JetUncertainties/CombinedMassUncertaintyComponent.h	(revision 786170)
++++ JetUncertainties/CombinedMassUncertaintyComponent.h	(working copy)
+@@ -59,6 +59,8 @@
+         // The two possible scale helpers
+         SG::AuxElement::ConstAccessor<xAOD::JetFourMom_t> m_caloMassScale_weights;
+         SG::AuxElement::ConstAccessor<xAOD::JetFourMom_t> m_TAMassScale_weights;
++        std::string m_caloMassScale_weights_str;
++        std::string m_TAMassScale_weights_str;
+ 
+         // Helper functions
+         virtual double getWeightFactorCalo(const xAOD::Jet& jet, const double shiftFactor) const;
+Index: Root/JetUncertaintiesTool.cxx
+===================================================================
+--- Root/JetUncertaintiesTool.cxx	(revision 786170)
++++ Root/JetUncertaintiesTool.cxx	(working copy)
+@@ -210,6 +210,9 @@
+         ATH_MSG_ERROR("Cannot find config file: " << m_configFile << " (path is " << m_path << ")");
+         return StatusCode::FAILURE;
+     }
++    else{
++        ATH_MSG_INFO("Config file found at: " << configFilePath << "!");
++    }
+ 
+     TEnv settings;
+     if (settings.ReadFile(configFilePath.Data(),kEnvGlobal))
+@@ -299,6 +302,8 @@
+         ATH_MSG_ERROR("Cannot open uncertainty histogram file: " << histFileName.Data());
+         return StatusCode::FAILURE;
+     }
++
++    ATH_MSG_INFO("Actual uncertainty root file is at: " << histFile->GetName());
+     
+     // Get a file-wide validity histogram if specified
+     TString validHistForFile = settings.GetValue("FileValidHistogram","");
+@@ -1612,9 +1617,10 @@
+     static SG::AuxElement::ConstAccessor<xAOD::JetFourMom_t> caloScale (CompMassDef::getJetScaleString(m_combMassWeightCaloMassDef).Data());
+     static SG::AuxElement::ConstAccessor<xAOD::JetFourMom_t> TAScale (CompMassDef::getJetScaleString(m_combMassWeightTAMassDef).Data());
+ 
+-
++    std::cout << "Here?" << std::endl;
+     const double caloRes = m_caloMassWeight->getValue(caloScale(jet).Pt()*m_energyScale,caloScale(jet).M()/caloScale(jet).Pt());
+     const double TARes   = m_TAMassWeight->getValue(TAScale(jet).Pt()*m_energyScale,TAScale(jet).M()/TAScale(jet).Pt());
++    std::cout << "Nope" << std::endl;
+ 
+     if (caloRes == 0 || TARes == 0) return 0;
+ 
+@@ -1779,6 +1785,7 @@
+ 
+ CP::CorrectionCode JetUncertaintiesTool::applyCorrection(xAOD::Jet& jet, const xAOD::EventInfo& eInfo) const
+ {
++
+     if (!m_isInit)
+     {
+         ATH_MSG_FATAL("Tool must be initialized before calling applyCorrection");
+@@ -1788,7 +1795,6 @@
+     // Check for a global validity histogram
+     if (m_fileValidHist && !m_fileValidHist->getValidity(jet))
+         return CP::CorrectionCode::OutOfValidityRange;
+-    
+ 
+     // Scale the jet and/or its moments by the uncertainty/uncertainties
+     // Note that uncertainties may be either positive or negative
+@@ -1810,16 +1816,16 @@
+             //ATH_MSG_ERROR("Uncertainty configuration is not valid for the specified jet when attempting to scale " << CompScaleVar::enumToString(scaleVar).Data() << ".  Set: " << m_currentUncSet->getName());
+         }
+     }
++
+     if (!allValid)
+         return CP::CorrectionCode::OutOfValidityRange;
+-    
++
+     // Handle each case as needed
+     for (size_t iVar = 0; iVar < uncSet.size(); ++iVar)
+     {
+         const CompScaleVar::TypeEnum scaleVar = uncSet.at(iVar).first;
+         //const double unc = uncSet.at(iVar).second;
+         const double shift = 1 + uncSet.at(iVar).second;
+-        
+ 
+         // Careful of const vs non-const objects with accessors
+         // Can unintentionally create something new which didn't exist, as jet is non-const
+Index: Root/UncertaintyComponent.cxx
+===================================================================
+--- Root/UncertaintyComponent.cxx	(revision 786170)
++++ Root/UncertaintyComponent.cxx	(working copy)
+@@ -310,8 +310,13 @@
+         return jet.m()/jet.pt();
+     
+     // Check if the specified scale is available and return it if so
+-    if (scale.isAvailable(jet))
+-        return scale(jet).M()/scale(jet).Pt();
++    // if (scale.isAvailable(jet))
++    //     return scale(jet).M()/scale(jet).Pt();
++
++    xAOD::JetFourMom_t jetp4;
++    if(jet.getAttribute<xAOD::JetFourMom_t>(CompMassDef::getJetScaleString(massDef).Data(), jetp4))
++        return jetp4.M()/jetp4.Pt();
++
+     // Fall-back on the TA moment as a float if applicable (TODO: temporary until JetCalibTools updated)
+     if (massDef == CompMassDef::TAMass && scaleTAMoment.isAvailable(jet))
+         return scaleTAMoment(jet)/jet.pt();
+Index: Root/ValidityHistogram.cxx
+===================================================================
+--- Root/ValidityHistogram.cxx	(revision 786170)
++++ Root/ValidityHistogram.cxx	(working copy)
+@@ -111,16 +111,22 @@
+ 
+ double InfoHelper::getMassOverPt(const xAOD::Jet& jet) const
+ {
++
+     static SG::AuxElement::ConstAccessor<xAOD::JetFourMom_t> scale(CompMassDef::getJetScaleString(m_massDef).Data());
+     static SG::AuxElement::ConstAccessor<float> scaleTAMoment("JetTrackAssistedMassCalibrated");
++ 
+ 
+     // UNKNOWN is just use the assigned scale
+     if (m_massDef == CompMassDef::UNKNOWN)
+         return jet.m()/jet.pt();
+     
+     // Check if the specified scale is available and return it if so
+-    if (scale.isAvailable(jet))
+-        return scale(jet).M()/scale(jet).Pt();
++    // if (scale.isAvailable(jet))
++    //     return scale(jet).M()/scale(jet).Pt();
++    xAOD::JetFourMom_t jetp4;
++    if(jet.getAttribute<xAOD::JetFourMom_t>(CompMassDef::getJetScaleString(m_massDef).Data(), jetp4))
++        return jetp4.M()/jetp4.Pt();
++
+     // Fall-back on the TA moment as a float if applicable (TODO: temporary until JetCalibTools updated)
+     if (m_massDef == CompMassDef::TAMass && scaleTAMoment.isAvailable(jet))
+         return scaleTAMoment(jet)/jet.pt();
+Index: Root/CombinedMassUncertaintyComponent.cxx
+===================================================================
+--- Root/CombinedMassUncertaintyComponent.cxx	(revision 786170)
++++ Root/CombinedMassUncertaintyComponent.cxx	(working copy)
+@@ -23,6 +23,8 @@
+     , m_TAMassWeight(NULL)
+     , m_caloMassScale_weights("")
+     , m_TAMassScale_weights("")
++    , m_caloMassScale_weights_str("")
++    , m_TAMassScale_weights_str("")
+ {
+     JESUNC_NO_DEFAULT_CONSTRUCTOR;
+ }
+@@ -37,6 +39,8 @@
+     , m_TAMassWeight(NULL)
+     , m_caloMassScale_weights("")
+     , m_TAMassScale_weights("")
++    , m_caloMassScale_weights_str("")
++    , m_TAMassScale_weights_str("")
+ {
+     ATH_MSG_DEBUG("Created CombinedMassUncertaintyComponent named " << getName().Data());
+ }
+@@ -51,6 +55,8 @@
+     , m_TAMassWeight(toCopy.m_TAMassWeight)
+     , m_caloMassScale_weights(toCopy.m_caloMassScale_weights)
+     , m_TAMassScale_weights(toCopy.m_TAMassScale_weights)
++    , m_caloMassScale_weights_str(toCopy.m_caloMassScale_weights_str)
++    , m_TAMassScale_weights_str(toCopy.m_TAMassScale_weights_str)
+ {
+     ATH_MSG_DEBUG("Creating copy of CombinedMassUncertaintyComponent named " << getName().Data());
+     if (toCopy.m_caloMassComp)
+@@ -155,6 +161,7 @@
+         case CompMassDef::CaloMass:
+         case CompMassDef::TAMass:
+             m_caloMassScale_weights = SG::AuxElement::ConstAccessor<xAOD::JetFourMom_t>(CompMassDef::getJetScaleString(caloMassDef).Data());
++            m_caloMassScale_weights_str = CompMassDef::getJetScaleString(caloMassDef).Data();
+             break;
+         default:
+             ATH_MSG_ERROR("Unsupported mass parametrization for the combined mass calo weights: " << getName().Data());
+@@ -165,6 +172,7 @@
+         case CompMassDef::CaloMass:
+         case CompMassDef::TAMass:
+             m_TAMassScale_weights = SG::AuxElement::ConstAccessor<xAOD::JetFourMom_t>(CompMassDef::getJetScaleString(TAMassDef).Data());
++            m_TAMassScale_weights_str = CompMassDef::getJetScaleString(TAMassDef).Data();
+             break;
+         default:
+             ATH_MSG_ERROR("Unsupported mass parametrization for the combined mass TA weights: " << getName().Data());
+@@ -291,6 +299,19 @@
+     static SG::AuxElement::ConstAccessor<xAOD::JetFourMom_t> caloMassScale(CompMassDef::getJetScaleString(CompMassDef::CaloMass).Data());
+     static SG::AuxElement::ConstAccessor<xAOD::JetFourMom_t> TAMassScale(CompMassDef::getJetScaleString(CompMassDef::TAMass).Data());
+ 
++    xAOD::JetFourMom_t jetp4_calo;
++    if(!jet.getAttribute<xAOD::JetFourMom_t>(CompMassDef::getJetScaleString(CompMassDef::CaloMass).Data(), jetp4_calo)){
++        ATH_MSG_ERROR("Error in getting calo-scale 4-momentum");
++        return false;
++    }
++
++    xAOD::JetFourMom_t jetp4_ta;
++    if(!jet.getAttribute<xAOD::JetFourMom_t>(CompMassDef::getJetScaleString(CompMassDef::TAMass).Data(), jetp4_ta)){
++        ATH_MSG_ERROR("Error in getting ta-scale 4-momentum");
++        return false;
++    }
++
++
+     // Get the weight factors
+     const double factorCalo = getWeightFactorCalo(jet,shiftFactorCalo);
+     const double factorTA   = getWeightFactorTA(jet,shiftFactorTA);
+@@ -309,12 +330,17 @@
+     // Watch for zero masses
+     // If one mass is zero, use the other without a weight
+     // If both are zero, it doesn't matter, the combined mass is zero
+-    if (caloMassScale(jet).M() == 0)
+-        combMass = TAMassScale(jet).M()*shiftFactorTA;
+-    else if (TAMassScale(jet).M() == 0)
+-        combMass = caloMassScale(jet).M()*shiftFactorCalo;
++    // if (caloMassScale(jet).M() == 0)
++    if (jetp4_calo.M() == 0)
++        // combMass = TAMassScale(jet).M()*shiftFactorTA;
++        combMass = jetp4_ta.M()*shiftFactorTA;
++    // else if (TAMassScale(jet).M() == 0)
++    else if (jetp4_ta.M() == 0)
++        // combMass = caloMassScale(jet).M()*shiftFactorCalo;
++        combMass = jetp4_calo.M()*shiftFactorCalo;
+     else
+-        combMass = (caloMassScale(jet).M()*shiftFactorCalo*caloWeight) + (TAMassScale(jet).M()*shiftFactorTA*TAWeight);
++        // combMass = (caloMassScale(jet).M()*shiftFactorCalo*caloWeight) + (TAMassScale(jet).M()*shiftFactorTA*TAWeight);
++        combMass = (jetp4_calo.M()*shiftFactorCalo*caloWeight) + (jetp4_ta.M()*shiftFactorTA*TAWeight);
+ 
+     //if (fabs(jet.pt()*m_energyScale-700)<1 && fabs(jet.m()*m_energyScale-70)<1) ATH_MSG_INFO(Form("CombMass: %f*%f*%f + %f*%f*%f = %f",caloMassScale(jet).M()*m_energyScale,shiftFactorCalo,caloWeight,TAMassScale(jet).M()*m_energyScale,shiftFactorTA,TAWeight,combMass*m_energyScale));
+ 
+@@ -396,17 +422,38 @@
+ 
+ double CombinedMassUncertaintyComponent::getWeightFactorCalo(const xAOD::Jet& jet, const double shiftFactor) const
+ {
+-    const double resolution = !m_caloMassWeight ? 0 : m_caloMassWeight->getValue(m_caloMassScale_weights(jet).Pt()*m_energyScale,
+-                                                                                 (m_caloMassScale_weights(jet).M()*shiftFactor)/m_caloMassScale_weights(jet).Pt()
++
++    xAOD::JetFourMom_t jetp4;
++    if(!jet.getAttribute<xAOD::JetFourMom_t>(m_caloMassScale_weights_str, jetp4)){
++        ATH_MSG_ERROR("Unable to get " << m_caloMassScale_weights_str);
++        return 0;
++    }
++
++    // const double resolution = !m_caloMassWeight ? 0 : m_caloMassWeight->getValue(m_caloMassScale_weights(jet).Pt()*m_energyScale,
++    //                                                                              (m_caloMassScale_weights(jet).M()*shiftFactor)/m_caloMassScale_weights(jet).Pt()
++    //                                                                             );
++    const double resolution = !m_caloMassWeight ? 0 : m_caloMassWeight->getValue(jetp4.Pt()*m_energyScale,
++                                                                                 (jetp4.M()*shiftFactor)/jetp4.Pt()
+                                                                                 );
++
+     return resolution == 0 ? 0 : 1./(resolution*resolution);
+ }
+ 
+ double CombinedMassUncertaintyComponent::getWeightFactorTA(const xAOD::Jet& jet, const double shiftFactor) const
+ {
+-    const double resolution = !m_TAMassWeight ? 0 : m_TAMassWeight->getValue(m_TAMassScale_weights(jet).Pt()*m_energyScale,
+-                                                                             (m_TAMassScale_weights(jet).M()*shiftFactor)/m_TAMassScale_weights(jet).Pt()
++    xAOD::JetFourMom_t jetp4;
++    if(!jet.getAttribute<xAOD::JetFourMom_t>(m_TAMassScale_weights_str, jetp4)){
++        ATH_MSG_ERROR("Unable to get " << m_TAMassScale_weights_str);
++        return 0;
++    }
++
++    // const double resolution = !m_TAMassWeight ? 0 : m_TAMassWeight->getValue(m_TAMassScale_weights(jet).Pt()*m_energyScale,
++    //                                                                          (m_TAMassScale_weights(jet).M()*shiftFactor)/m_TAMassScale_weights(jet).Pt()
++    //                                                                         );
++    const double resolution = !m_TAMassWeight ? 0 : m_TAMassWeight->getValue(jetp4.Pt()*m_energyScale,
++                                                                             (jetp4.M()*shiftFactor)/jetp4.Pt()
+                                                                             );
++
+     return resolution == 0 ? 0 : 1./(resolution*resolution);
+ }
+ 

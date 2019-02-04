@@ -1,0 +1,599 @@
+Version        | Date Produced |
+hh4b-v00-00-00 | 2015-09-23    |
+
+Comments: First production of data nTuples
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-00-02-00
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-00-02-00
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-00-02-00
+https://github.com/UCATLAS/xAODAnaHelpers.git branch hh4b-v00-00-00
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.3.25
+
+user.pbryant:user.pbryant.data15_13TeV.00*.physics_Main.hh4b_v00-00-00_MiniNTuple.root
+
+________________________________________________________________________
+Version        | Date Produced |
+hh4b-v00-01-00 | 2015-10-13    |
+
+Comments: New branch names/structure. Vectors of dijets stored as Higgs
+	  candidates (hcand). 
+	  MiniNTuples no longer take in jet containers, just the hcand 
+	  containers.
+	  Added algo to Resolved to select top bjets and if there are 
+	  fewer than four, fill in the container with highest pt non-
+	  bjets. 
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-00-03-00
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-00-03-00
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-00-03-00
+https://github.com/UCATLAS/xAODAnaHelpers.git tag hh4b-v00-01-00
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.3.25
+
+rucio list-dids group.phys-exotics:group.phys-exotics.data15_13TeV.*.physics_Main.hh4b_v00-01-00_MiniNTuple.root
+
+________________________________________________________________________
+Version        | Date Produced |
+hh4b-v00-01-01 | 2015-10-16    |
+
+Comments: Adding JVT cut for jets below 50 GeV
+	  Re calculate JVT in JetCalibrator
+	  Fixed memory leak in Resolved
+	  Adding jet info for additional jets not associated with hcands
+	  adding lumi block
+	  adding mu for PRW
+	  bjet selection now at 90% wp for resolved
+	  adding preselection at least 2 bjets at 90% wp, 2 dijets, 2 fatjets
+	  fixed definition of pass trigger flags to use 0.5e34 menu
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-00-03-01
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-00-03-01
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-00-03-01
+https://github.com/UCATLAS/xAODAnaHelpers.git tag hh4b-v00-01-01
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.3.25
+
+rucio list-dids group.phys-exotics:group.phys-exotics.data15_13TeV.*.physics_Main.hh4b_v00-01-01_MiniNTuple.root
+
+________________________________________________________________________
+Version        | Date Produced |
+hh4b-v00-01-02 | 2015-10-18    |
+
+Comments: Fix bug in preselection which was only passing events which 
+	  pass both criteria instead of either criteria
+	  Adding systematics for resolved MC
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-00-03-02
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-00-03-02
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-00-03-01
+https://github.com/UCATLAS/xAODAnaHelpers.git tag hh4b-v00-01-02
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.3.25
+
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_data.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2 prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b_v00-01-02/" --optSubmitFlags="--official"
+
+rucio list-dids group.phys-exotics:group.phys-exotics.data15_13TeV.*.physics_Main.hh4b_v00-01-02_MiniNTuple.root
+
+________________________________________________________________________
+Version        | Date Produced |
+hh4b-v00-01-03 | 2015-10-25    |
+
+Comments: adding first pass at muons
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-00-03-03
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-00-03-03
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-00-03-03
+https://github.com/UCATLAS/xAODAnaHelpers.git tag hh4b-v00-01-03
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.3.25
+
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_data.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2 prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b_v00-01-03/" --optSubmitFlags="--official"
+
+rucio list-dids group.phys-exotics:group.phys-exotics.data15_13TeV.*.physics_Main.hh4b_v00-01-03_MiniNTuple.root
+
+________________________________________________________________________
+Version        | Date Produced |
+hh4b-v00-01-04 | 2015-11-01    |
+
+Comments: Adding dijet pt cut of 150 for resolved selection
+          increading jet selector pt cut to 40 for resolved
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-00-03-04
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-00-03-04
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-00-03-04
+https://github.com/UCATLAS/xAODAnaHelpers.git tag hh4b-v00-01-04
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.3.25
+
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_data.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2 prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b_v00-01-04/" --optSubmitFlags="--official"
+
+rucio list-dids group.phys-exotics:group.phys-exotics.data15_13TeV.*.physics_Main.hh4b_v00-01-04_MiniNTuple.root
+
+________________________________________________________________________
+Version        | Date Produced |
+hh4b-v00-04-00 | 2015-11-04    |
+
+Comments: Now produce resolved higgs candidates for QCD estimation and 4b
+          region separately. Improves agreement in notherjets
+          MC weights are now stored correctly
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-00-04-00
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-00-04-00
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-00-04-00
+https://github.com/UCATLAS/xAODAnaHelpers.git tag hh4b-v00-04-00
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.3.32
+
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_data.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2 prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-v00-04-00/" --optSubmitFlags="--official"
+
+rucio list-dids group.phys-exotics:group.phys-exotics.data15_13TeV.*.physics_Main.hh4b-v00-04-00_MiniNTuple.root
+
+________________________________________________________________________
+Version        | Date Produced |
+hh4b-00-04-01  | 2015-11-12    |
+
+Comments: Switching to production with containers for data periods
+          now have full 2015 GRL
+          resolved b-tagging at 70% WP
+          simplified trigger menu
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-00-04-01
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-00-04-01
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-00-04-01
+https://github.com/UCATLAS/xAODAnaHelpers.git tag hh4b-00-04-01
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.3.32
+
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_data.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2 prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-00-04-01/" --optSubmitFlags="--official"
+
+rucio list-dids group.phys-exotics:group.phys-exotics.data15_13TeV.*.physics_Main.hh4b-00-04-01_MiniNTuple.root
+
+________________________________________________________________________
+Version        | Date Produced |
+hh4b-00-04-02  | 2015-11-23    |
+
+Comments: Adding resolved leptonic top selection
+          Running on new derivation for MC with added triggers
+          Will run soon on new Data derivation
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-00-04-02
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-00-04-02
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-00-04-02
+https://github.com/UCATLAS/xAODAnaHelpers.git tag hh4b-00-04-02
+PhysicsAnalysis/JetTagging/JetTagPerformanceCalibration/xAODBTaggingEfficiency/tags/xAODBTaggingEfficiency-00-00-23
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.3.32
+
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_data.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2 prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-00-04-02/" --optSubmitFlags="--official"
+
+rucio list-dids group.phys-exotics:group.phys-exotics.data15_13TeV.*.physics_Main.hh4b-00-04-02_MiniNTuple.root
+
+________________________________________________________________________
+Version        | Date Produced |
+hh4b-00-05-00  | 2015-11-29    |
+
+Comments: Adding jet cleaning vars, jet multiplicites for cut flow
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-00-05-00
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-00-05-00
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-00-05-00
+https://github.com/UCATLAS/xAODAnaHelpers.git tag hh4b-00-05-00
+PhysicsAnalysis/JetTagging/JetTagPerformanceCalibration/xAODBTaggingEfficiency/tags/xAODBTaggingEfficiency-00-00-23
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.3.32
+
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_data.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2 prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-00-05-00/" --optSubmitFlags="--official"
+
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_mc.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2 --isMC prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-00-05-00/" --optSubmitFlags="--official"
+
+rucio list-dids group.phys-exotics:group.phys-exotics.data15_13TeV.*.physics_Main.hh4b-00-05-00_MiniNTuple.root
+
+________________________________________________________________________
+Version        | Date Produced |
+hh4b-00-06-00  | 2015-12-08    |
+
+Comments: Resolved only uses on dijet container now. Resolve overlap
+          conflict with highest average MV2
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-00-06-00
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-00-06-00
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-00-06-00
+https://github.com/UCATLAS/xAODAnaHelpers.git tag hh4b-00-06-00
+PhysicsAnalysis/JetTagging/JetTagPerformanceCalibration/xAODBTaggingEfficiency/tags/xAODBTaggingEfficiency-00-00-23
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.3.32
+
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_data.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2 prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-00-06-00/" --optSubmitFlags="--official"
+
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_mc.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2 --isMC prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-00-06-00/" --optSubmitFlags="--official"
+
+rucio list-dids group.phys-exotics:group.phys-exotics.data15_13TeV.*.physics_Main.hh4b-00-06-00_MiniNTuple.root
+
+________________________________________________________________________
+Version        | Date Produced |
+hh4b-00-06-01  | 2016-01-20    | Tuna
+
+Comments: Add large-R jet mass > 50 GeV to object selection.
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-00-06-01
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-00-06-01
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-00-06-01
+https://github.com/UCATLAS/xAODAnaHelpers.git tag hh4b-00-06-01 (if I can figure out how to fucking tag)
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.3.38
+
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_data.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2 prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-00-06-00/" --optSubmitFlags="--official"
+
+# no MC yet in this production.
+# xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_mc.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2 --isMC prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-00-06-00/" --optSubmitFlags="--official"
+
+rucio list-dids group.phys-exotics:group.phys-exotics.data15_13TeV.*.physics_Main.hh4b-00-06-01_MiniNTuple.root
+
+________________________________________________________________________
+Version        | Date Produced |
+hh4b-00-07-00  | 2016-01-27    | JohnA
+
+Comments: Adding BTag SF uncertianties for resolved jets
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-00-07-00
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-00-07-00
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-00-07-00
+https://github.com/UCATLAS/xAODAnaHelpers.git tag hh4b-00-07-00
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.3.38
+
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_data.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2 prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-00-07-00/" --optSubmitFlags="--official"
+
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_mc.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2 --isMC prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-00-07-00/" --optSubmitFlags="--official"
+
+# Also ran one with out the systematics
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_mc.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2 --isMC prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b_nosyst-00-07-00/" --optSubmitFlags="--official"
+
+rucio list-dids group.phys-exotics:group.phys-exotics.data15_13TeV.*.physics_Main.hh4b-00-06-01_MiniNTuple.root
+
+________________________________________________________________________
+Version        | Date Produced |
+hh4b-00-07-01  | 2016-01-31    | Tuna
+
+Comments: Require at least two fat jets with m > 50 in boosted pre-selection.
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-00-07-01
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-00-07-01
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-00-07-01
+https://github.com/UCATLAS/xAODAnaHelpers.git tag hh4b-00-07-01
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.3.38
+
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_data.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2 prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-00-07-01/" --optSubmitFlags="--official"
+
+# with systematics
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_mc.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2 --isMC prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-00-07-01/" --optSubmitFlags="--official"
+
+# without systematics
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_mc.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2        prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b_nosyst-00-07-01/" --optSubmitFlags="--official"
+
+rucio list-dids group.phys-exotics:group.phys-exotics.*hh4b*00-07-01_MiniNTuple.root
+
+
+________________________________________________________________________
+Version        | Date Produced |
+hh4b-00-07-02  | 2016-02-01    | JohnA
+
+Comments: Run with boosted only and resolved only 
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-00-07-02
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-00-07-02
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-00-07-02
+https://github.com/UCATLAS/xAODAnaHelpers.git tag hh4b-00-07-02
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.3.38
+
+# with Resolved Systematics
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_mc.txt --inputList --config XhhCommon/scripts/combinedMasterResolvedSys.py -f --inputDQ2 --isMC prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4bNoBSys-00-07-02/" --optSubmitFlags="--official"
+
+# with Boosted Systematics
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_mc.txt --inputList --config XhhCommon/scripts/combinedMasterBoostedSys.py -f --inputDQ2 --isMC prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4bNoRSys-00-07-02/" --optSubmitFlags="--official"
+
+rucio list-dids group.phys-exotics:group.phys-exotics.*hh4b*00-07-02_MiniNTuple.root
+
+http://bigpanda.cern.ch/tasks/?taskname=*hh4b*00-07-02*
+
+________________________________________________________________________
+Version        | Date Produced |
+hh4b-00-07-03  | 2016-02-05    | JohnA
+
+Comments: Add BTag SF for the JES/JER variations
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-00-07-03
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-00-07-03
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-00-07-03
+https://github.com/UCATLAS/xAODAnaHelpers.git tag hh4b-00-07-03
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.3.38
+
+# with Resolved Systematics
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_mc.txt --inputList --config XhhCommon/scripts/combinedMasterResolvedSys.py -f --inputDQ2 --isMC prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4bNoBSys-00-07-03/" --optSubmitFlags="--official"
+
+# with Boosted Systematics
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_mc.txt --inputList --config XhhCommon/scripts/combinedMasterBoostedSys.py -f --inputDQ2 --isMC prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4bNoRSys-00-07-03/" --optSubmitFlags="--official"
+
+rucio list-dids group.phys-exotics:group.phys-exotics.*hh4b*00-07-03_MiniNTuple.root
+
+http://bigpanda.cern.ch/tasks/?taskname=*hh4b*00-07-03*
+
+________________________________________________________________________
+Version   | Date Produced |
+01-02-00  | 2016 June 6   | Patrick/Tony
+
+Comments: 2016 Analysis. Produce all possible resolved HCs.
+	  Boosted analysis no longer has nTrk Jet requirement.
+	  Switching to MV2c10 tagger and running on MC15c for first time.
+
+	  JOBS ALL FAILED. Had local path definition for jet calibration file
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-01-02-00
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-01-02-00
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-01-02-00
+https://github.com/UCATLAS/xAODAnaHelpers.git tag hh4b-01-02-00
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.4.8
+Had to checkout some rc packages and make local modifications due to muon issues in MC15c. Should be fixed in later root core builds...
+svn+ssh://svn.cern.ch/reps/atlasoff/PhysicsAnalysis/MuonID/MuonIDAnalysis/MuonMomentumCorrections/tags/MuonMomentumCorrections-01-00-31 (some modifications by Tony)
+svn+ssh://svn.cern.ch/reps/atlasoff/Reconstruction/Jet/JetUncertainties/tags/JetUncertainties-00-09-43 (some modifications by Tony)
+svn+ssh://svn.cern.ch/reps/atlasoff/PhysicsAnalysis/JetTagging/JetTagPerformanceCalibration/xAODBTaggingEfficiency/tags/xAODBTaggingEfficiency-00-00-34
+svn+ssh://svn.cern.ch/reps/atlasoff/Reconstruction/Jet/JetCalibTools/tags/JetCalibTools-00-04-66
+svn+ssh://svn.cern.ch/reps/atlasoff/PhysicsAnalysis/MuonID/MuonSelectorTools/tags/MuonSelectorTools-00-05-23
+
+________________________________________________________________________
+Version   | Date Produced |
+01-02-01  | 2016 June 7   | Patrick/Tony
+
+Comments: 2016 Analysis. Produce all possible resolved HCs.
+	  Boosted analysis no longer has nTrk Jet requirement.
+	  Switching to MV2c10 tagger and running on MC15c for first time.
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-01-02-01
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-01-02-01
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-01-02-01
+https://github.com/UCATLAS/xAODAnaHelpers.git tag hh4b-01-02-01
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.4.8
+Had to checkout some rc packages and make local modifications due to muon issues in MC15c. Should be fixed in later root core builds...
+svn+ssh://svn.cern.ch/reps/atlasoff/PhysicsAnalysis/MuonID/MuonIDAnalysis/MuonMomentumCorrections/tags/MuonMomentumCorrections-01-00-31 (some modifications by Tony)
+svn+ssh://svn.cern.ch/reps/atlasoff/Reconstruction/Jet/JetUncertainties/tags/JetUncertainties-00-09-43 (some modifications by Tony)
+svn+ssh://svn.cern.ch/reps/atlasoff/PhysicsAnalysis/JetTagging/JetTagPerformanceCalibration/xAODBTaggingEfficiency/tags/xAODBTaggingEfficiency-00-00-34
+svn+ssh://svn.cern.ch/reps/atlasoff/Reconstruction/Jet/JetCalibTools/tags/JetCalibTools-00-04-66
+svn+ssh://svn.cern.ch/reps/atlasoff/PhysicsAnalysis/MuonID/MuonSelectorTools/tags/MuonSelectorTools-00-05-23
+
+
+________________________________________________________________________
+Version   | Date Produced |
+01-02-02  | 2016 June 16  | Patrick/Tony
+
+Comments: 2016 Analysis. Produce all possible resolved HCs.
+	  Boosted analysis no longer has nTrk Jet requirement.
+	  Switching to MV2c10 tagger and running on MC15c for first time.
+	  Now have reprocessed 2015 data. 
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-01-02-02
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-01-02-02
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-01-02-02
+https://github.com/UCATLAS/xAODAnaHelpers.git tag hh4b-01-02-02
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.4.11
+Had to checkout some rc packages and make local modifications due to muon issues in MC15c. Should be fixed in later root core builds...
+svn+ssh://svn.cern.ch/reps/atlasoff/Reconstruction/Jet/JetUncertainties/tags/JetUncertainties-00-09-47
+svn+ssh://svn.cern.ch/reps/atlasoff/PhysicsAnalysis/MuonID/MuonSelectorTools/tags/MuonSelectorTools-00-05-32
+
+--- Root/MuonSelectionTool.cxx (revision 755258)
++++ Root/MuonSelectionTool.cxx (working copy)
+@@ -16,7 +16,7 @@
+     //corresponds to 0, 1, 2, 3, 4=HighPt
+     declareProperty( "MuQuality", m_quality = 1 );
+     declareProperty( "ToroidOff", m_toroidOff = false );
+-    declareProperty( "TurnOffMomCorr", m_TurnOffMomCorr = false );
++    declareProperty( "TurnOffMomCorr", m_TurnOffMomCorr = true );
+     declareProperty( "CalibrationRelease", m_calibration_version = "PreRec2016_2016-04-13" );
+
+
+________________________________________________________________________
+Version   | Date Produced |
+01-02-03  | 2016 July 16  | Patrick/Tony
+
+Comments: 2016 Analysis. Produce all possible resolved HCs. Finalized tag for ICHEP.
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-01-02-03
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-01-02-03
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-01-02-03
+https://github.com/UCATLAS/xAODAnaHelpers.git tag hh4b-01-02-03
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.4.14
+
+version="01-02-03"
+analysisbase="2.4.14"
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_resub.txt   --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2        prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-${version}/" --optSubmitFlags="--official"
+
+--------------------------------------------------------------------------------
+Version        | Date Produced |
+hh4b-01-02-06  | 2016-07-22    | John Alison
+
+Comments: Add Fix ttbar systematics. Update data set.
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-01-02-05
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-01-02-05
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-01-02-05
+https://github.com/UCATLAS/xAODAnaHelpers.git tag hh4b-01-02-05
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.4.11
+
+# MC (with Resolved Systematics)
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_mc.txt --inputList --config XhhCommon/scripts/combinedMaster.py --extraOptions='--doResolvedSys' -f --inputDQ2 --isMC prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-01-02-06/" --optSubmitFlags="--official"
+
+# Data
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_data.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2  prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-01-02-06/" --optSubmitFlags="--official"
+
+rucio list-dids group.phys-exotics:group.phys-exotics.*hh4b*01-02-06_MiniNTuple.root
+
+http://bigpanda.cern.ch/tasks/?taskname=*hh4b*01-02-06*
+
+# Run run with m_mc flag fixed
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_mc.txt --inputList --config XhhCommon/scripts/combinedMaster.py --extraOptions='--doResolvedSys' -f --inputDQ2 --isMC prun --optGridDestSE=MWT2_UC_LOCALGROUPDISK  --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-01-02-07/" --optSubmitFlags="--official"
+
+http://bigpanda.cern.ch/tasks/?taskname=*hh4b*01-02-07*
+
+
+--------------------------------------------------------------------------------
+Version        | Date Produced |
+hh4b-02-00-00  | 2016-10-04    | John Alison
+
+Comments: Update with MeT (No systematics)
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-02-00-00
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-02-00-00
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-02-00-00
+https://github.com/UCATLAS/xAODAnaHelpers.git tag hh4b-02-00-00
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.4.18
+
+# MC 
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_mc.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2 --isMC prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-02-00-00/" --optSubmitFlags="--official"
+
+# Data
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_data.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2  prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-02-00-00/" --optSubmitFlags="--official"
+
+rucio list-dids group.phys-exotics:group.phys-exotics.*hh4b*02-00-00_MiniNTuple.root
+
+http://bigpanda.cern.ch/tasks/?taskname=*hh4b*02-00-00*
+
+#xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_data.txt --inputList --config XhhCommon/scripts/makeBoostedNtuple.py  -f --inputDQ2  prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.ggHbb-02-00-01/" --optSubmitFlags="--official"
+
+--------------------------------------------------------------------------------
+Version        | Date Produced |
+hh4b-02-00-02  | 2016-10-27    | John Alison
+
+Comments: Update with overlap removal for MeT and electrons
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-02-00-02
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-02-00-02
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-02-00-02
+https://github.com/UCATLAS/xAODAnaHelpers.git tag hh4b-02-00-02
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.4.18
+
+# MC 
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_mc.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2 --isMC prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-02-00-02/" --optSubmitFlags="--official"
+
+# Data
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_data.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2  prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-02-00-02/" --optSubmitFlags="--official"
+
+rucio list-dids group.phys-exotics:group.phys-exotics.*hh4b*02-00-02_MiniNTuple.root
+
+http://bigpanda.cern.ch/tasks/?taskname=*hh4b*02-00-02*
+
+
+--------------------------------------------------------------------------------
+Version        | Date Produced |
+hh4b-02-01-00  | 2016-12-07    | John Alison
+
+Comments: Update with new samples (MC only)
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-02-01-00
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-02-01-00
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-02-01-00
+https://github.com/UCATLAS/xAODAnaHelpers.git tag hh4b-02-01-00
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.4.22
+
+# MC 
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_mc.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputRucio --isMC prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-02-01-00/" --optSubmitFlags="--official"
+
+# Data
+#xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_data.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2  prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-02-00-02/" --optSubmitFlags="--official"
+
+rucio list-dids group.phys-exotics:group.phys-exotics.*hh4b*02-01-00_MiniNTuple.root
+
+http://bigpanda.cern.ch/tasks/?taskname=*hh4b*02-01-00*
+
+
+
+--------------------------------------------------------------------------------
+Version        | Date Produced |
+hh4b-02-02-00  | 2016-12-07    | John Alison
+
+Comments: Update with new samples including data
+
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhCommon/tags/XhhCommon-02-02-00
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhResolved/tags/XhhResolved-02-02-00
+/Physics/Exotic/JDM/hh4b/Run2/Code/XhhBoosted/tags/XhhBoosted-02-02-00
+https://github.com/UCATLAS/xAODAnaHelpers.git tag hh4b-02-02-00
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.4.23
+
+# MC 
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_mc.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputRucio --isMC prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-02-02-00/" --optSubmitFlags="--official"
+
+# Data
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_data.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputDQ2  prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-02-02-00/" --optSubmitFlags="--official"
+
+rucio list-dids group.phys-exotics:group.phys-exotics.*hh4b*02-02-00_MiniNTuple.root
+
+http://bigpanda.cern.ch/tasks/?taskname=*hh4b*02-02-00*
+
+
+
+--------------------------------------------------------------------------------
+Version        | Date Produced |
+hh4b-02-03-00  | 2017-12-05    | John Alison
+
+Comments: Run signal samples for trigger study
+
+XhhCommon-02-03-00
+XhhResolved-02-03-00
+XhhBoosted-02-03-00
+hh4b-02-03-00
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.4.28
+
+# MC 
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_mc.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputRucio --isMC prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-02-03-00/" --optSubmitFlags="--official"
+
+rucio list-dids group.phys-exotics:group.phys-exotics.*hh4b*02-03-00_MiniNTuple.root
+
+http://bigpanda.cern.ch/tasks/?taskname=*hh4b*02-03-00*
+
+
+
+--------------------------------------------------------------------------------
+Version        | Date Produced |
+hh4b-02-03-01  | 2017-12-05    | John Alison
+
+Comments: Run signal samples for trigger study
+
+XhhCommon-02-03-01
+XhhResolved-02-03-01
+XhhBoosted-02-03-01
+hh4b-02-03-01
+/cvmfs/atlas.cern.ch/repo/sw/ASG/AnalysisBase/2.4.31
+
+# MC 
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_mc.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputRucio --isMC prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-02-03-01/" --optSubmitFlags="--official"
+
+rucio list-dids group.phys-exotics:group.phys-exotics.*hh4b*02-03-01_MiniNTuple.root
+
+http://bigpanda.cern.ch/tasks/?taskname=*hh4b*02-03-01*
+
+
+<<<<<<< HEAD
+--------------------------------------------------------------------------------
+Version        | Date Produced |
+hh4b-02-03-02  | 2017 May 18   | Patrick Bryant
+
+Comments: Fixed trigger emulation tool, strange muon veto thing, 
+
+XhhCommon-02-03-02
+XhhResolved-02-03-02
+XhhBoosted-02-03-02
+
+# MC 
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_mc.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputRucio --isMC prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-02-03-02/" --optSubmitFlags="--official"
+
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_mc.txt --inputList --config XhhCommon/scripts/combinedMaster.py --extraOptions='--doResolvedSys --doBoostedSys --doLepTopSys' -f --inputRucio --isMC prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-02-03-02-syst/" --optSubmitFlags="--official"
+
+# Data
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_data.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputRucio  prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-02-03-02/" --optSubmitFlags="--official"
+
+rucio list-dids group.phys-exotics:group.phys-exotics.*hh4b*02-03-02_MiniNTuple.root
+
+http://bigpanda.cern.ch/tasks/?taskname=*hh4b*02-03-02*
+
+--------------------------------------------------------------------------------
+Version        | Date Produced |
+hh4b-02-03-03  | 2017-25-05    | John Alison
+
+Comments: Just signal samples for trigger study
+
+XhhCommon-02-03-03
+hh4b-02-03-02
+
+xAH_run.py --files XhhCommon/scripts/grid_samples_EXOT8_mc.txt --inputList --config XhhCommon/scripts/combinedMaster.py -f --inputRucio --isMC prun --optGridOutputSampleName="group.phys-exotics.%in:name[1]%.%in:name[2]%.%in:name[3]%.hh4b-02-03-03/" --optSubmitFlags="--official"
+
+rucio list-dids group.phys-exotics:group.phys-exotics.*hh4b*02-03-03_MiniNTuple.root
+
+http://bigpanda.cern.ch/tasks/?taskname=*hh4b*02-03-03*
+
+./XhhCommon/scripts/datriHome.sh MWT2_UC_LOCALGROUPDISK group.phys-exotics.mc15_13TeV.*.MadGraphHerwigppEvtGen_UEEE5_CTEQ6L1_CT10ME_Xhh_m*_4b.hh4b-02-03-03

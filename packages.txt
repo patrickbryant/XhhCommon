@@ -1,0 +1,4 @@
+svn+ssh://svn.cern.ch/reps/atlasoff/Reconstruction/Jet/JetCalibTools/tags/JetCalibTools-00-04-33
+svn+ssh://svn.cern.ch/reps/atlasoff/PhysicsAnalysis/D3PDTools/SampleHandler/tags/SampleHandler-00-00-90
+
+

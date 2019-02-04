@@ -1,0 +1,162 @@
+directory: ../../plots/resolved/sideband_00-01-02/m4jdep/iter1/
+
+output: test.root
+
+ratio: yes
+
+autoRatio: no
+
+systematics: no
+
+data: no
+
+samples:
+
+    - name    : data
+      is_data : yes
+      stack   : no
+      overlay : yes
+      path    : ../../reWeightDataM4jKine1/hist-pbryant.root
+      folder  : PassM4jDepFourTag_Sideband
+      label   : "Data"
+      color   : ROOT.kBlack
+      weights :
+          - "1"
+
+    - name    : qcd
+      is_data : no
+      stack   : yes
+      overlay : no
+      path    : ../../reWeightDataM4jKine1/hist-pbryant.root
+      folder  : PassM4jDepTwoTag_Sideband
+      label   : "QCD"
+      color   : ROOT.kRed-10
+      weights :
+          - "1"
+
+plots:
+
+    - name     : leadHCand_dRjj
+      variable : leadHCand_dRjj
+      xtitle   : "dR in leading DiJet system"
+      ytitle   : Events
+      logY     : no
+      rebin    : 2
+      bin_low  : 0.4
+      bin_high : 1.6
+    - name     : sublHCand_dRjj
+      variable : sublHCand_dRjj
+      xtitle   : "dR in subleading DiJet system"
+      ytitle   : Events
+      logY     : no
+      rebin    : 2
+      bin_low  : 0.4
+      bin_high : 1.6
+    - name     : hcands_dR
+      variable : hCandDr
+      xtitle   : "Higgs Candidate dR"
+      ytitle   : Events
+      logY     : no
+      rebin    : 3
+      bin_low  : 0.3
+      bin_high : 5.5
+    - name     : hcands_dPhi
+      variable : hCandDphi
+      xtitle   : "Higgs Candidate dPhi"
+      ytitle   : Events
+      logY     : no
+      rebin    : 3
+    - name     : hcands_dEta
+      variable : hCandDeta
+      xtitle   : "Higgs Candidate dEta"
+      ytitle   : Events
+      logY     : no
+      rebin    : 4
+    - name     : leadHCand_Mass
+      variable : leadHCand_Mass
+      xtitle   : "lead dijet mass"
+      ytitle   : Events
+      logY     : yes
+      rebin    : 4
+      bin_low  : 25.0
+      bin_high : 450.0
+    - name     : sublHCand_Mass
+      variable : sublHCand_Mass
+      xtitle   : "sublead dijet mass"
+      ytitle   : Events
+      logY     : yes
+      rebin    : 4
+      bin_low  : 25.0
+      bin_high : 400.0
+    - name     : leadHCand_Pt
+      variable : leadHCand_Pt_l
+      xtitle   : "Lead Higgs Candidate Pt"
+      ytitle   : Events
+      logY     : yes
+      rebin    : 3
+      bin_low  : 150.0
+      bin_high : 800.0
+    - name     : sublHCand_Pt
+      variable : sublHCand_Pt_m
+      xtitle   : "Sublead Higgs Candidate Pt"
+      ytitle   : Events
+      logY     : yes
+      rebin    : 3
+      bin_low  : 100.0
+      bin_high : 800.0
+    - name     : leadHCand_leadJet_Pt
+      variable : leadHCand_leadJet_Pt_m
+      xtitle   : "lead dijet lead jet pt"
+      ytitle   : Events
+      logY     : yes
+      rebin    : 2
+      bin_low  : 150.0
+      bin_high : 700.0
+    - name     : leadHCand_sublJet_Pt
+      variable : leadHCand_sublJet_Pt_m
+      xtitle   : "lead dijet sublead jet pt"
+      ytitle   : Events
+      logY     : yes
+      rebin    : 3
+      bin_low  : 0.0
+      bin_high : 300.0
+    - name     : sublHCand_leadJet_Pt
+      variable : sublHCand_leadJet_Pt_m
+      xtitle   : "sublead dijet lead jet pt"
+      ytitle   : Events
+      logY     : yes
+      rebin    : 3
+      bin_low  : 40.0
+      bin_high : 600.0
+    - name     : sublHCand_sublJet_Pt
+      variable : sublHCand_sublJet_Pt_m
+      xtitle   : "sublead dijet sublead jet pt"
+      ytitle   : Events
+      logY     : yes
+      rebin    : 3
+      bin_low  : 0.0
+      bin_high : 400.0
+    - name     : m4j
+      variable : m4j_l
+      xtitle   : "M_{4j} [GeV]"
+      ytitle   : Number of events
+      rebin    : 3
+      bin_low  : 300.0
+      bin_high : 1600.0
+      logY     : no
+    - name     : nljets
+      variable : nJetOther
+      xtitle   : "# of extra jets"
+      ytitle   : Events
+      logY     : no
+      rebin    : 1
+      bin_low  : -0.5
+      bin_high : 8.5
+    - name     : nbjets
+      variable : nbjets
+      xtitle   : "# of bjets in dijets"
+      ytitle   : Events
+      logY     : no
+      rebin    : 1
+      bin_low  : -0.5
+      bin_high : 4.5

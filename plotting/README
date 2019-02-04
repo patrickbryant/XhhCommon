@@ -1,0 +1,2 @@
+py -i XhhCommon/plotting/plot.py -i --plotter interactive -c XhhCommon/plotting/plotIConfig.py --out testPlots-v00-04-00 --inputDir OutputData-v00-04-00/
+py XhhCommon/plotting/plotResolved.py --plotter interactive -c XhhCommon/plotting/plotIConfig.py --out testPlots-v00-04-00 --inputDir OutputData-v00-04-00/

@@ -1,0 +1,59 @@
+#tree: XhhMiniNtuple
+#rootFile: ../../reWeightData1/hist-pbryant.root
+
+directory: ../../plots/resolved/sideband_00-01-02
+
+output: test.root
+
+#selection:
+#     - Resolved_nbjets == 4
+#     - ResolvedPass_SidebandMass
+
+ratio: yes
+
+systematics: no
+
+data: no
+
+samples:
+
+    - name    : data
+      is_data : yes
+      stack   : no
+      overlay : yes
+      path    : ../../reWeightData1/hist-pbryant.root
+      folder  : FourTag_Sideband
+      label   : "Data"
+      color   : ROOT.kBlack
+      weights :
+          - "1"
+
+    - name    : qcd
+      is_data : no
+      stack   : yes
+      overlay : no
+      path    : ../../reWeightData1/hist-pbryant.root
+      folder  : TwoTag_Sideband
+      label   : "QCD"
+      color   : ROOT.kRed-10
+      weights :
+          - "1"
+
+plots:
+
+    - name     : leadHCand_Pt_l
+      variable : leadHCand_Pt_l
+      xtitle   : "Lead Higgs Candidate Pt"
+      ytitle   : Events
+      logY     : yes
+      n_bins   : 10
+      bin_low  : 100.0
+      bin_high : 900.0
+    - name     : sublHCand_Pt_l
+      variable : sublHCand_Pt_l
+      xtitle   : "Sublead Higgs Candidate Pt"
+      ytitle   : Events
+      logY     : yes
+      n_bins   : 10
+      bin_low  : 100.0
+      bin_high : 900.0
